@@ -14,3 +14,10 @@ after_success:
   - docker build -t nilesh2000/multi-nginx ./nginx
   - docker build -t nilesh2000/multi-server ./server
   - docker build -t nilesh2000/multi-worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push nilesh2000/multi-client
+  - docker push nilesh2000/multi-nginx
+  - docker push nilesh2000/multi-server
+  - docker push nilesh2000/multi-worker
