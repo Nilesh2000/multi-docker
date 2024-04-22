@@ -1,0 +1,16 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t nilesh2000/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run nilesh2000/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t nilesh2000/multi-client ./client
+  - docker build -t nilesh2000/multi-nginx ./nginx
+  - docker build -t nilesh2000/multi-server ./server
+  - docker build -t nilesh2000/multi-worker ./worker
