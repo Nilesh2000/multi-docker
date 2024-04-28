@@ -21,3 +21,15 @@ after_success:
   - docker push nilesh2000/multi-nginx
   - docker push nilesh2000/multi-server
   - docker push nilesh2000/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-southeast-2"
+  app: "multi-docker"
+  env: "Multi-docker-env"
+  bucket_name: "elasticbeanstalk-ap-southeast-2-381492066461"
+  bucket_path: "docker-multi"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
